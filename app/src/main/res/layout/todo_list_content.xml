@@ -8,17 +8,23 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_margin="@dimen/text_margin" />
 
+    <TextView
+        android:id="@+id/duedate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"/>
+<!--
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="right">
+        >
         <TextView
-            android:id="@+id/dueDate"
+            android:id="@+id/duedate2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
@@ -28,7 +34,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- ToDo onClick -->
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +44,6 @@
                 android:focusable="false"
                 android:clickable="true" />
 
-            <!-- ToDo onClick -->
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +53,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
+-->
 </LinearLayout>

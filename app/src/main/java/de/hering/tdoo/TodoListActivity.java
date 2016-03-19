@@ -85,13 +85,15 @@ public class TodoListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).name);
-            holder.mContentView.setText(mValues.get(position).description);
+            holder.mDueDateView.setText(mValues.get(position).getDueDateString());
+            /*
             if(mValues.get(position).isFavourite){
                 holder.mStarView.setVisibility(View.VISIBLE);
             }else{
                 holder.mStarView.setVisibility(View.INVISIBLE);
             }
             holder.mCheckboxView.setChecked(mValues.get(position).isDone);
+            */
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,23 +115,23 @@ public class TodoListActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mIdView;
-            public final TextView mContentView;
-            public final ImageView mStarView;
-            public final CheckBox mCheckboxView;
+            //public final ImageView mStarView;
+            //public final CheckBox mCheckboxView;
+            public final TextView mDueDateView;
             public ToDo.ToDoItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
                 mIdView = (TextView) view.findViewById(R.id.name);
-                mContentView = (TextView) view.findViewById(R.id.dueDate);
-                mStarView = (ImageView) view.findViewById(R.id.starView);
-                mCheckboxView = (CheckBox) view.findViewById(R.id.checkBox);
+                //mStarView = (ImageView) view.findViewById(R.id.starView);
+                //mCheckboxView = (CheckBox) view.findViewById(R.id.checkBox);
+                mDueDateView = (TextView) view.findViewById(R.id.duedate);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + mIdView.getText() + "'";
             }
         }
     }

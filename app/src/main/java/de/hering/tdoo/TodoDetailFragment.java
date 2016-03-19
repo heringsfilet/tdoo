@@ -62,7 +62,8 @@ public class TodoDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.todo_detail)).setText(mItem.description);
+            ((TextView) rootView.findViewById(R.id.todo_detail_name)).setText(mItem.description);
+            ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.dueDate.toString());
         }
 
         return rootView;

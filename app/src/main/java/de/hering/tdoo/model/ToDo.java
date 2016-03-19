@@ -1,6 +1,8 @@
 package de.hering.tdoo.model;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,6 +52,11 @@ public class ToDo {
 
         public ToDoItem(String name) {
             this.name = name;
+        }
+
+        public String getDueDateString(){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy HH:mm");
+            return sdf.format(this.dueDate);
         }
 
         @Override
