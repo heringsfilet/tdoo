@@ -7,35 +7,11 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="past" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a46072b5-f938-46ee-99d0-4acf94649b73" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-tvdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_add_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-tvdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_create_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_add.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_create.xml" />
-      <change type="DELETED" beforePath="C:\Users\Heringsfilet\Desktop\dev\tdoo\.idea\libraries\android_android_23.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/model/ToDo.java" afterPath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/model/ToDo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/todo_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/todo_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/todo_list_content.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/todo_list_content.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tdoo.iws" />
@@ -90,6 +66,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="activity_todo_detail.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TodoListActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,13 +93,13 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+              <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_todo_list.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_todo_list.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml">
           <provider selected="true" editor-type-id="android-designer">
             <state />
@@ -1770,6 +1759,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml" />
       </list>
     </option>
   </component>
@@ -2259,7 +2249,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458559881383</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updated icons and detail view">
+      <created>1458565318091</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1458565318091</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2315,7 +2311,8 @@
     <MESSAGE value="updated todo views (something is still wrong with the list content)" />
     <MESSAGE value="fixed display of list content (no function yet)" />
     <MESSAGE value="mark todo items with dueDate in the past" />
-    <option name="LAST_COMMIT_MESSAGE" value="mark todo items with dueDate in the past" />
+    <MESSAGE value="updated icons and detail view" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated icons and detail view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2693,17 +2690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.30267063">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2763,6 +2749,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
+          <folding>
+            <element signature="e#1464#1483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/todo_detail.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2785,21 +2784,19 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/de/hering/tdoo/TodoDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+          <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_list.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_todo_detail.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
-          <folding>
-            <element signature="e#1464#1483#0" expanded="true" />
-          </folding>
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
