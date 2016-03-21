@@ -1,21 +1,68 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/todo_detail_name"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context="de.hering.tdoo.TodoDetailFragment" />
+        android:layout_marginTop="@dimen/text_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_detail_duedate"
+            style="?android:attr/textAppearanceLarge"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            >
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/checkBox"
+                android:checked="true"
+                android:enabled="true"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:clickable="true"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/starViewOn"
+                android:src="@android:drawable/btn_star_big_on"
+                android:clickable="true"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/starViewOff"
+                android:src="@android:drawable/btn_star_big_off"
+                android:clickable="true"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/todo_detail_duedate"/>
+        android:id="@+id/todo_detail_description"
+        android:layout_margin="@dimen/text_margin"
+        />
+
+
 </LinearLayout>
 
 

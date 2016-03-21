@@ -1,14 +1,20 @@
 package de.hering.tdoo;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.media.Image;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Date;
 
 import de.hering.tdoo.model.ToDo;
 
@@ -62,8 +68,24 @@ public class TodoDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.todo_detail_name)).setText(mItem.description);
-            ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.dueDate.toString());
+            ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.getDueDateString());
+            if(mItem.dueDate.before(new Date())){
+                ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setBackgroundColor(Color.parseColor("#FFCDD2"));
+            }
+
+            ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
+
+            // ToDo set OnClickListener
+            if(mItem.isFavourite){
+                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
+                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
+            }else{
+                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.VISIBLE);
+                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.GONE);
+            }
+
+            // ToDo set OnClickListener
+            ((CheckBox) rootView.findViewById(R.id.checkBox)).setChecked(mItem.isDone);
         }
 
         return rootView;

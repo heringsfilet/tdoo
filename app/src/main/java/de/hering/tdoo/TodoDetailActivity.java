@@ -1,6 +1,9 @@
 package de.hering.tdoo;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +29,7 @@ public class TodoDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setBackground(getDrawable(R.drawable.ic_create_white));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

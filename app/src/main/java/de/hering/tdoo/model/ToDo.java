@@ -21,7 +21,7 @@ public class ToDo {
     private static final int COUNT = 50;
 
     static {
-        // Add some sample items.
+        // ToDo remove bootstrap
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
         }
@@ -35,11 +35,12 @@ public class ToDo {
     private static ToDoItem createDummyItem(int position) {
         ToDoItem tmp = new ToDoItem("ToDo " + position);
         long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
-        long end = Timestamp.valueOf("2016-03-30 00:00:00").getTime();
+        long end = Timestamp.valueOf("2016-10-30 00:00:00").getTime();
         long diff = end - offset + 1;
         tmp.dueDate = new Date(offset + (long)(Math.random() * diff));
         tmp.isFavourite = Math.random() < 0.3;
         tmp.isDone = Math.random() < 0.5;
+        tmp.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ";
         return tmp;
     }
 
