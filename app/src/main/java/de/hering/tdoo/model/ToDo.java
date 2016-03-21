@@ -60,6 +60,16 @@ public class ToDo {
             return sdf.format(this.dueDate);
         }
 
+        public String getDueDateDateString(){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            return sdf.format(this.dueDate);
+        }
+
+        public String getDueTimeString(){
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            return sdf.format(this.dueDate);
+        }
+
         @Override
         public String toString() {
             return name;

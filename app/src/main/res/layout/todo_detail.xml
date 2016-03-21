@@ -11,11 +11,12 @@
         android:layout_marginTop="@dimen/text_margin"
         android:id="@+id/todo_detail_duedatecontainer">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/todo_detail_duedate"
+            android:id="@+id/editName"
             style="?android:attr/textAppearanceLarge"/>
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -56,12 +57,47 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/todo_detail_duedate"/>
+    -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="8"
+        android:id="@+id/todo_detail_duedate"
+        android:layout_weight=".5"
+        android:onClick="showDatePickerDialog"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="4"
+        android:id="@+id/todo_detail_duetime"
+        android:layout_weight=".5"
+        android:onClick="showTimePickerDialog"/>
+    </LinearLayout>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
         android:id="@+id/todo_detail_description"
         android:layout_margin="@dimen/text_margin"
         />
+
+
+
 
 
 </LinearLayout>
