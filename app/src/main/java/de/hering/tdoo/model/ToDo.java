@@ -18,7 +18,7 @@ public class ToDo {
      */
     public static final Map<String, ToDoItem> ITEM_MAP = new HashMap<String, ToDoItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 50;
 
     static {
         // Add some sample items.
@@ -34,8 +34,8 @@ public class ToDo {
 
     private static ToDoItem createDummyItem(int position) {
         ToDoItem tmp = new ToDoItem("ToDo " + position);
-        long offset = Timestamp.valueOf("2016-05-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2016-12-30 00:00:00").getTime();
+        long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
+        long end = Timestamp.valueOf("2016-03-30 00:00:00").getTime();
         long diff = end - offset + 1;
         tmp.dueDate = new Date(offset + (long)(Math.random() * diff));
         tmp.isFavourite = Math.random() < 0.3;

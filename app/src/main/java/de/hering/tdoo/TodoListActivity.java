@@ -2,6 +2,7 @@ package de.hering.tdoo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,19 +11,24 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import de.hering.tdoo.model.ToDo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,7 +101,14 @@ public class TodoListActivity extends AppCompatActivity {
                 holder.mStarViewOn.setVisibility(View.GONE);
                 holder.mStarViewOff.setVisibility(View.VISIBLE);
             }
+
+            // ToDo set OnClickListener
             holder.mCheckboxView.setChecked(mValues.get(position).isDone);
+
+            // dueDate is in the past
+            if(mValues.get(position).dueDate.before(new Date())){
+                holder.mItemLayout.setBackgroundColor(Color.parseColor("#FFCDD2"));
+            }
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,6 +134,7 @@ public class TodoListActivity extends AppCompatActivity {
             public final ImageView mStarViewOff;
             public final CheckBox mCheckboxView;
             public final TextView mDueDateView;
+            public final LinearLayout mItemLayout;
             public ToDo.ToDoItem mItem;
 
             public ViewHolder(View view) {
@@ -131,6 +145,7 @@ public class TodoListActivity extends AppCompatActivity {
                 mStarViewOff = (ImageView) view.findViewById(R.id.starViewOff);
                 mCheckboxView = (CheckBox) view.findViewById(R.id.checkBox);
                 mDueDateView = (TextView) view.findViewById(R.id.duedate);
+                mItemLayout = (LinearLayout) view.findViewById(R.id.list_item_background);
             }
 
             @Override
