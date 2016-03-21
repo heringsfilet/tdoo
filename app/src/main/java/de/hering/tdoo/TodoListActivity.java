@@ -86,14 +86,16 @@ public class TodoListActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).name);
             holder.mDueDateView.setText(mValues.get(position).getDueDateString());
-            /*
+
+            // ToDo set OnClickListener
             if(mValues.get(position).isFavourite){
-                holder.mStarView.setVisibility(View.VISIBLE);
+                holder.mStarViewOn.setVisibility(View.VISIBLE);
+                holder.mStarViewOff.setVisibility(View.GONE);
             }else{
-                holder.mStarView.setVisibility(View.INVISIBLE);
+                holder.mStarViewOn.setVisibility(View.GONE);
+                holder.mStarViewOff.setVisibility(View.VISIBLE);
             }
             holder.mCheckboxView.setChecked(mValues.get(position).isDone);
-            */
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,8 +117,9 @@ public class TodoListActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mIdView;
-            //public final ImageView mStarView;
-            //public final CheckBox mCheckboxView;
+            public final ImageView mStarViewOn;
+            public final ImageView mStarViewOff;
+            public final CheckBox mCheckboxView;
             public final TextView mDueDateView;
             public ToDo.ToDoItem mItem;
 
@@ -124,8 +127,9 @@ public class TodoListActivity extends AppCompatActivity {
                 super(view);
                 mView = view;
                 mIdView = (TextView) view.findViewById(R.id.name);
-                //mStarView = (ImageView) view.findViewById(R.id.starView);
-                //mCheckboxView = (CheckBox) view.findViewById(R.id.checkBox);
+                mStarViewOn = (ImageView) view.findViewById(R.id.starViewOn);
+                mStarViewOff = (ImageView) view.findViewById(R.id.starViewOff);
+                mCheckboxView = (CheckBox) view.findViewById(R.id.checkBox);
                 mDueDateView = (TextView) view.findViewById(R.id.duedate);
             }
 
