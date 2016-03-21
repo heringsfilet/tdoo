@@ -70,7 +70,7 @@ public class TodoDetailFragment extends Fragment {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.getDueDateString());
             if(mItem.dueDate.before(new Date())){
-                ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setBackgroundColor(Color.parseColor("#FFCDD2"));
+                ((LinearLayout) rootView.findViewById(R.id.todo_detail_duedatecontainer)).setBackgroundColor(Color.parseColor("#FFCDD2"));
             }
 
             ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
