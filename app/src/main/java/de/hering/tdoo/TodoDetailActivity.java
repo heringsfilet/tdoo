@@ -33,8 +33,14 @@ public class TodoDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Löschen", Snackbar.LENGTH_LONG)
+                        .setAction("DELETE", new View.OnClickListener(){
+                            @Override
+                            public void onClick(View view){
+                                // ToDO delete item
+                            }
+                        })
+                        .show();
             }
         });
 

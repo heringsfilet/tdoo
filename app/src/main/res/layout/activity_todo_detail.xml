@@ -50,4 +50,5 @@
         app:layout_anchor="@+id/todo_detail_container"
         app:layout_anchorGravity="top|end" />
 
+
 </android.support.design.widget.CoordinatorLayout>

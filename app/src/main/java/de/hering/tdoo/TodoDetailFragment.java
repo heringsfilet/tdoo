@@ -6,6 +6,7 @@ import android.media.Image;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.activeandroid.query.Select;
+
 import java.util.Date;
 
-import de.hering.tdoo.model.ToDo;
+import de.hering.tdoo.model.Todo;
 
 /**
  * A fragment representing a single Todo detail screen.
@@ -34,7 +37,7 @@ public class TodoDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private ToDo.ToDoItem mItem;
+    private Todo mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +54,8 @@ public class TodoDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = ToDo.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            //mItem = Todo.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = Todo.load(Todo.class, getArguments().getLong(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -75,7 +79,7 @@ public class TodoDetailFragment extends Fragment {
 
             ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
 
-            // ToDo set OnClickListener
+            // Todo set OnClickListener
             if(mItem.isFavourite){
                 ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
                 ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
@@ -84,10 +88,15 @@ public class TodoDetailFragment extends Fragment {
                 ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.GONE);
             }
 
-            // ToDo set OnClickListener
+            // Todo set OnClickListener
             ((CheckBox) rootView.findViewById(R.id.checkBox)).setChecked(mItem.isDone);
         }
 
         return rootView;
+    }
+
+
+    public void deleteItem(){
+        Log.v("delete", "löschen... " + mItem.name);
     }
 }
