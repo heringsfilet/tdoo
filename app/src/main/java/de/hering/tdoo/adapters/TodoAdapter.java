@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.hering.tdoo.R;
 import de.hering.tdoo.TodoDetailActivity;
@@ -26,9 +28,9 @@ import de.hering.tdoo.model.Todo;
 public class TodoAdapter extends
     RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
-    private ArrayList<Todo> mValues;
+    private List<Todo> mValues;
 
-    public TodoAdapter(ArrayList<Todo> items) {
+    public TodoAdapter(List<Todo> items) {
         mValues = items;
     }
 
@@ -67,7 +69,13 @@ public class TodoAdapter extends
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, TodoDetailActivity.class);
-                intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, holder.mItem.name);
+
+                Todo tmp = holder.mItem;
+                Long id = holder.mItem.getId();
+                Log.v("ID put Extra", " " + id);
+
+                intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, id);
+
 
                 context.startActivity(intent);
             }

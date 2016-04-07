@@ -32,16 +32,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.activeandroid.ActiveAndroid;
-import com.activeandroid.Model;
-import com.activeandroid.query.Select;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.hering.tdoo.adapters.TodoAdapter;
 import de.hering.tdoo.model.Todo;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -114,8 +109,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     // Todo bootstrap
     void bootstrapTodoItems(){
+        Todo.deleteAll(Todo.class);
+
         for (int i = 1; i <= 100; i++) {
-            Todo tmp = new Todo("Todo " + i);
+            Todo tmp = new Todo();
+            tmp.name = "Todo " + i;
             long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
             long end = Timestamp.valueOf("2016-10-30 00:00:00").getTime();
             long diff = end - offset + 1;
@@ -125,42 +123,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             tmp.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ";
             tmp.save();
         }
-        /*ActiveAndroid.beginTransaction();
-        try {
-            for (int i = 1; i <= 100; i++) {
-                Todo tmp = new Todo("Todo " + i);
-                long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
-                long end = Timestamp.valueOf("2016-10-30 00:00:00").getTime();
-                long diff = end - offset + 1;
-                tmp.dueDate = new Date(offset + (long)(Math.random() * diff));
-                tmp.isFavourite = Math.random() < 0.3;
-                tmp.isDone = Math.random() < 0.5;
-                tmp.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ";
-                tmp.save();
-            }
-            ActiveAndroid.setTransactionSuccessful();
-        }
-        finally {
-            ActiveAndroid.endTransaction();
-        }
-        */
-
-        Todo tmp = new Todo("Todo xyz");
-        long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
-        long end = Timestamp.valueOf("2016-10-30 00:00:00").getTime();
-        long diff = end - offset + 1;
-        tmp.dueDate = new Date(offset + (long)(Math.random() * diff));
-        tmp.isFavourite = Math.random() < 0.3;
-        tmp.isDone = Math.random() < 0.5;
-        tmp.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ";
-        tmp.save();
-
-        Todo tdo= Todo.findOne(100);
-        ArrayList<Model> list2 = Model.all(Todo.class);
-        List<Model> list3 = new Select().from(Todo.class).execute();
-        Log.v("list-size"," "+list2.size());
-
-
     }
 
     private void populateAutoComplete() {

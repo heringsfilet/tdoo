@@ -71,8 +71,7 @@ public class TodoListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        ArrayList<Todo> tdoolist = new Select().from(Todo.class).execute();
+        List<Todo> tdoolist = Todo.listAll(Todo.class);
         recyclerView.setAdapter(new TodoAdapter(tdoolist));
-
     }
 }

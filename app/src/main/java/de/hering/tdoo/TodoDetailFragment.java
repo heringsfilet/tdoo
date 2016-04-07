@@ -23,9 +23,6 @@ import de.hering.tdoo.model.Todo;
 
 /**
  * A fragment representing a single Todo detail screen.
- * This fragment is either contained in a {@link TodoListActivity}
- * in two-pane mode (on tablets) or a {@link TodoDetailActivity}
- * on handsets.
  */
 public class TodoDetailFragment extends Fragment {
     /**
@@ -54,8 +51,7 @@ public class TodoDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            //mItem = Todo.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-            mItem = Todo.load(Todo.class, getArguments().getLong(ARG_ITEM_ID));
+            mItem = Todo.findById(Todo.class, getArguments().getLong(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
