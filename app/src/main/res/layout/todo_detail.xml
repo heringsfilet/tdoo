@@ -1,8 +1,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/detailfragmentviewcontainer">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -87,13 +88,11 @@
     </LinearLayout>
 
 
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:id="@+id/todo_detail_description"
-        android:layout_margin="@dimen/text_margin"
         />
 
     <View
@@ -102,17 +101,28 @@
         android:layout_weight="1"
         />
 
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Löschen"
-        android:background="#d50000"
-        android:id="@+id/deleteButton"
-        android:onClick="deleteTodo"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speichern"
+            android:id="@+id/saveButton"
+            android:onClick="saveTodo"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Löschen"
+            android:background="#d50000"
+            android:id="@+id/deleteButton"
+            android:onClick="deleteTodo"/>
 
+    </LinearLayout>
 </LinearLayout>
 
 

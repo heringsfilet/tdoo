@@ -1,6 +1,8 @@
 package de.hering.tdoo;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,7 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +35,7 @@ public class TodoDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String DETAIL_FRAGMENT_TAG = "DETAIL_FRAGMENT_TAG";
 
     /**
      * The dummy content this fragment is presenting.
@@ -64,6 +70,7 @@ public class TodoDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // ToDo declare as final for click listeners?
         View rootView = inflater.inflate(R.layout.todo_detail, container, false);
 
         // Show the dummy content as text in a TextView.
@@ -73,6 +80,7 @@ public class TodoDetailFragment extends Fragment {
                 ((LinearLayout) rootView.findViewById(R.id.todo_detail_duedatecontainer)).setBackgroundColor(Color.parseColor("#FFCDD2"));
             }
 
+            ((EditText) rootView.findViewById(R.id.editName)).setText(mItem.name);
             ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
 
             // Todo set OnClickListener
@@ -86,13 +94,35 @@ public class TodoDetailFragment extends Fragment {
 
             // Todo set OnClickListener
             ((CheckBox) rootView.findViewById(R.id.checkBox)).setChecked(mItem.isDone);
+
+            View.OnClickListener onDeleteClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItem.delete();
+                    getActivity().startActivity(new Intent(getActivity(), TodoListActivity.class));
+                }
+            };
+            ((Button) rootView.findViewById(R.id.deleteButton)).setOnClickListener(onDeleteClickListener);
+
+
+            View.OnClickListener onSaveClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Todo update TodoItem
+                    ViewParent parent = v.getParent().getParent();
+                    LinearLayout parentLayout = (LinearLayout) parent;
+
+                    String enteredName = ((EditText) parentLayout.findViewById(R.id.editName)).getText().toString();
+                    mItem.name = enteredName;
+                    mItem.save();
+
+                    // ToDo reload detail view?
+                    getActivity().startActivity(new Intent(getActivity(), TodoListActivity.class));
+                }
+            };
+            ((Button) rootView.findViewById(R.id.saveButton)).setOnClickListener(onSaveClickListener);
         }
 
         return rootView;
-    }
-
-
-    public void deleteItem(){
-        Log.v("delete", "löschen... " + mItem.name);
     }
 }
