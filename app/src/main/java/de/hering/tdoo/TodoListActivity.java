@@ -14,6 +14,8 @@ import android.support.design.widget.Snackbar;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -56,12 +58,29 @@ public class TodoListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        // ToDo Toolbar für die Sortierung
+        // setSupportActionBar(toolbar);
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        // ToDo new Item
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, TodoDetailActivity.class);
+
+                Todo tmp = new Todo();
+                Long id = tmp.save();
+
+                intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, id);
+
+                context.startActivity(intent);
+                /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                        */
             }
         });
 
@@ -70,8 +89,16 @@ public class TodoListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.list_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        List<Todo> tdoolist = Todo.listAll(Todo.class);
+        // default Sortierung
+        List<Todo> tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_done ASC");
         recyclerView.setAdapter(new TodoAdapter(tdoolist));
     }
 }

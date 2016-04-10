@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/order_done"
+        android:title="Nach erledigt sortieren"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/order_importance"
+        android:title="Nach Wichtigkeit+Datum sortieren"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/order_date"
+        android:title="Nach Datum+Wichtigkeit sortieren"
+        app:showAsAction="never"/>
+</menu>

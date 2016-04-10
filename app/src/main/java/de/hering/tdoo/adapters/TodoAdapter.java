@@ -56,8 +56,38 @@ public class TodoAdapter extends
             holder.mStarViewOff.setVisibility(View.VISIBLE);
         }
 
+        View.OnClickListener onFavouriteClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.mItem.isFavourite = !holder.mItem.isFavourite;
+                holder.mItem.save();
+
+                // ToDo Anzeige vom Item ändern (starOn und starOff)
+                if(holder.mItem.isFavourite){
+                    holder.mStarViewOn.setVisibility(View.VISIBLE);
+                    holder.mStarViewOff.setVisibility(View.GONE);
+                }else{
+                    holder.mStarViewOff.setVisibility(View.VISIBLE);
+                    holder.mStarViewOn.setVisibility(View.GONE);
+                }
+            }
+        };
+
+        holder.mStarViewOn.setOnClickListener(onFavouriteClickListener);
+        holder.mStarViewOff.setOnClickListener(onFavouriteClickListener);
+
+
         // Todo set OnClickListener
         holder.mCheckboxView.setChecked(mValues.get(position).isDone);
+
+        View.OnClickListener onCheckboxClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.mItem.isDone = !holder.mItem.isDone;
+                holder.mItem.save();
+            }
+        };
+        holder.mCheckboxView.setOnClickListener(onCheckboxClickListener);
 
         // dueDate is in the past
         if(mValues.get(position).dueDate.before(new Date())){
@@ -75,7 +105,6 @@ public class TodoAdapter extends
                 Log.v("ID put Extra", " " + id);
 
                 intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, id);
-
 
                 context.startActivity(intent);
             }

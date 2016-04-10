@@ -1,7 +1,9 @@
 package de.hering.tdoo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
@@ -70,10 +72,8 @@ public class TodoDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // ToDo declare as final for click listeners?
         View rootView = inflater.inflate(R.layout.todo_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.getDueDateString());
             if(mItem.dueDate.before(new Date())){
@@ -83,7 +83,26 @@ public class TodoDetailFragment extends Fragment {
             ((EditText) rootView.findViewById(R.id.editName)).setText(mItem.name);
             ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
 
-            // Todo set OnClickListener
+            View.OnClickListener onFavouriteClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItem.isFavourite = !mItem.isFavourite;
+
+                    // ToDo Anzeige vom Item ändern (starOn und starOff)
+                    View rootView = (View) v.getParent().getParent().getParent();
+                    if(mItem.isFavourite){
+                        ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
+                        ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
+                    }else{
+                        ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.VISIBLE);
+                        ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.GONE);
+                    }
+                }
+            };
+
+            ((ImageView) rootView.findViewById(R.id.starViewOn)).setOnClickListener(onFavouriteClickListener);
+            ((ImageView) rootView.findViewById(R.id.starViewOff)).setOnClickListener(onFavouriteClickListener);
+
             if(mItem.isFavourite){
                 ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
                 ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
@@ -95,11 +114,39 @@ public class TodoDetailFragment extends Fragment {
             // Todo set OnClickListener
             ((CheckBox) rootView.findViewById(R.id.checkBox)).setChecked(mItem.isDone);
 
+            View.OnClickListener onCheckboxClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItem.isDone = !mItem.isDone;
+                }
+            };
+            ((CheckBox) rootView.findViewById(R.id.checkBox)).setOnClickListener(onCheckboxClickListener);
+
+
+
+
             View.OnClickListener onDeleteClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItem.delete();
-                    getActivity().startActivity(new Intent(getActivity(), TodoListActivity.class));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setCancelable(true);
+                    builder.setTitle("Eintrag löschen?");
+                    builder.setMessage(mItem.name + " wirklich löschen?");
+                    builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mItem.delete();
+                            getActivity().startActivity(new Intent(getActivity(), TodoListActivity.class));
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
                 }
             };
             ((Button) rootView.findViewById(R.id.deleteButton)).setOnClickListener(onDeleteClickListener);
@@ -116,7 +163,6 @@ public class TodoDetailFragment extends Fragment {
                     mItem.name = enteredName;
                     mItem.save();
 
-                    // ToDo reload detail view?
                     getActivity().startActivity(new Intent(getActivity(), TodoListActivity.class));
                 }
             };

@@ -9,8 +9,8 @@ import java.util.Date;
 
 
 public class Todo extends SugarRecord {
-    public String name;
-    public String description;
+    public String name = "Todo";
+    public String description = "Beschreibung";
     public Boolean isDone = false;
     public Boolean isFavourite = false;
     public Date dueDate;
@@ -36,5 +36,11 @@ public class Todo extends SugarRecord {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public long save(){
+        return super.save();
+        // ToDo: Auch im Web speichern
     }
 }
