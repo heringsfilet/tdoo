@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private Boolean isOnline(){
-        // ToDo die Webanwendung testen, nicht allgemein (geht sowieso nicht wegen genymotion free)
+        // ToDo auf Internetverbindung testen. genymotion liefer immer true
         return true;
 
         /*
@@ -137,7 +137,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+
+       return netInfo != null && netInfo.isConnectedOrConnecting();
         */
     }
 
