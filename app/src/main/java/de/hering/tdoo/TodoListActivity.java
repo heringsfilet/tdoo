@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -48,6 +49,7 @@ public class TodoListActivity extends AppCompatActivity {
     private ListView listViews;
     private ArrayList<Todo> toDoItems;
     private ArrayAdapter<Todo> toDoItemsAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +98,31 @@ public class TodoListActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        // default Sortierung
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        List<Todo> tdoolist;
+        boolean result = true;
+
+        switch (item.getItemId()) {
+            case R.id.order_date:
+                tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY due_date ASC, is_favourite DESC");
+                break;
+            case R.id.order_importance:
+                tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_favourite DESC, due_date ASC");
+                break;
+            default:
+                tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_done ASC");
+                result =  super.onOptionsItemSelected(item);
+        }
+
+        recyclerView.setAdapter(new TodoAdapter(tdoolist));
+
+        return result;
+    }
+
+    private void setupRecyclerView(@NonNull RecyclerView rv) {
+        recyclerView = rv;
         List<Todo> tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_done ASC");
         recyclerView.setAdapter(new TodoAdapter(tdoolist));
     }
