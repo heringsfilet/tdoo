@@ -141,7 +141,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         */
     }
 
-    // ToDo check for errors
     private TextWatcher textWatcher = new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 checkTextFields();
@@ -430,7 +429,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
-            // TODO: register the new account here.
             return true;
         }
 

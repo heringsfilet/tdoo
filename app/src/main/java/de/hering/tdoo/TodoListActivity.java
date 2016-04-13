@@ -60,13 +60,9 @@ public class TodoListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        // ToDo Toolbar für die Sortierung
-        // setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        // ToDo new Item
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,15 +70,12 @@ public class TodoListActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, TodoDetailActivity.class);
 
                 Todo tmp = new Todo();
+                tmp.dueDate = new Date();
                 Long id = tmp.save();
 
                 intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, id);
 
                 context.startActivity(intent);
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                        */
             }
         });
 

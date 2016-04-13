@@ -14,7 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 /**
- * An activity representing a single Todo detail screen. This
+ * An activity representing a single Tdoo detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
  * in a {@link TodoListActivity}.
@@ -27,22 +27,6 @@ public class TodoDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setBackground(getDrawable(R.drawable.ic_create_white));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Löschen", Snackbar.LENGTH_LONG)
-                        .setAction("DELETE", new View.OnClickListener(){
-                            @Override
-                            public void onClick(View view){
-                                // ToDO delete item
-                            }
-                        })
-                        .show();
-            }
-        });
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();

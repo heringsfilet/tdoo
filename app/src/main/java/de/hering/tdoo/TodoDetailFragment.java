@@ -25,7 +25,7 @@ import java.util.Date;
 import de.hering.tdoo.model.Todo;
 
 /**
- * A fragment representing a single Todo detail screen.
+ * A fragment representing a single Tdoo detail screen.
  */
 public class TodoDetailFragment extends Fragment {
     /**
@@ -111,7 +111,6 @@ public class TodoDetailFragment extends Fragment {
     private View.OnClickListener onSaveClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // Todo update TodoItem
             ViewParent parent = v.getParent().getParent();
             LinearLayout parentLayout = (LinearLayout) parent;
 
@@ -173,8 +172,6 @@ public class TodoDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.todo_detail, container, false);
 
         if (mItem != null) {
-
-            // ToDo on click show date or time picker
             ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.getDueDateDateString());
             ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setText(mItem.getDueTimeString());
 

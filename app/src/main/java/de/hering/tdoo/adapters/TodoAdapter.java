@@ -47,7 +47,6 @@ public class TodoAdapter extends
         holder.mIdView.setText(mValues.get(position).name);
         holder.mDueDateView.setText(mValues.get(position).getDueDateString());
 
-        // Todo set OnClickListener
         if(mValues.get(position).isFavourite){
             holder.mStarViewOn.setVisibility(View.VISIBLE);
             holder.mStarViewOff.setVisibility(View.GONE);
@@ -62,7 +61,6 @@ public class TodoAdapter extends
                 holder.mItem.isFavourite = !holder.mItem.isFavourite;
                 holder.mItem.save();
 
-                // ToDo Anzeige vom Item ändern (starOn und starOff)
                 if(holder.mItem.isFavourite){
                     holder.mStarViewOn.setVisibility(View.VISIBLE);
                     holder.mStarViewOff.setVisibility(View.GONE);
@@ -77,7 +75,6 @@ public class TodoAdapter extends
         holder.mStarViewOff.setOnClickListener(onFavouriteClickListener);
 
 
-        // Todo set OnClickListener
         holder.mCheckboxView.setChecked(mValues.get(position).isDone);
 
         View.OnClickListener onCheckboxClickListener = new View.OnClickListener() {
