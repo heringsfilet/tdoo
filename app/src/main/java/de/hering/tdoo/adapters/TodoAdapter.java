@@ -100,9 +100,7 @@ public class TodoAdapter extends
                 Context context = v.getContext();
                 Intent intent = new Intent(context, TodoDetailActivity.class);
 
-                Todo tmp = holder.mItem;
                 Long id = holder.mItem.getId();
-                Log.v("ID put Extra", " " + id);
 
                 intent.putExtra(TodoDetailFragment.ARG_ITEM_ID, id);
 

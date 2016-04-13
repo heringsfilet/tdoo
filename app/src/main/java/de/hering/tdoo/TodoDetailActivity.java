@@ -64,7 +64,7 @@ public class TodoDetailActivity extends AppCompatActivity {
             // using a fragment transaction.
             TodoDetailFragment fragment = new TodoDetailFragment();
             fragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.todo_detail_container, fragment)
                     .commit();
         }
