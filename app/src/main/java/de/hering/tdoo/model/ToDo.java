@@ -38,9 +38,19 @@ public class Todo extends SugarRecord {
         return name;
     }
 
+/* ToDo
+    Wurde eine Schreiboperation auf der lokalen SQLite Datenbank erfolgreich ausgeführt, soll die betreffende Operation auf der Webanwendung aufgerufen werden.
+    Die durch die SQLite Datenbank zugewiesenen IDs können durch die Webanwendung übernommen werden
+*/
     @Override
     public long save(){
         return super.save();
         // ToDo: Auch im Web speichern
+    }
+
+    @Override
+    public boolean delete(){
+        return super.delete();
+        // ToDo: Auch im Web löschen
     }
 }

@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -36,7 +38,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,15 +87,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
         // Todo bootstrapping
-        bootstrapTodoItems();
+        //bootstrapTodoItems();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
-        // ToDo ohne Internetverbindung gleich weiterleiten
-        if(!isOnline()){
-            this.startActivity(new Intent(this,TodoListActivity.class));
+        if (isOnline()) {
+            List<Todo> tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_done ASC");
+            if (tdoolist.size() > 0) {
+                // es gibt lokale Einträge
+                // ToDo alle ToDos auf Seiten der Webanwendung löschen
+                // ToDo alle lokalen ToDos an die Webanwendung schicken
+            } else {
+                // es gibt keine lokalen Einträge
+                // ToDo alle Einträge laden
+            }
+            goToList();
+        } else {
+            Toast.makeText(getApplicationContext(), "Die Webanwendung ist nicht erreichbar, es können Daten nur lokal gespeichert werden!",
+                    Toast.LENGTH_LONG).show();
         }
 
 
@@ -127,31 +144,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private Boolean isOnline(){
-        // ToDo auf Internetverbindung testen. genymotion liefer immer true
-        return true;
+    private void goToList() {
+        this.startActivity(new Intent(this, TodoListActivity.class));
+    }
 
-        /*
-        Context cx = getApplicationContext();
-        Context cx1 = getBaseContext();
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-
-       return netInfo != null && netInfo.isConnectedOrConnecting();
-        */
+    private Boolean isOnline() {
+        // enter ip adress of your own PC so genymotion can access local web app
+        try {
+            return InetAddress.getByName("192.168.1.2").isReachable(200);
+        } catch (Exception e) {
+            Log.e("foo", e.getMessage());
+        }
+        return false;
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                checkTextFields();
-            }
+        public void afterTextChanged(Editable s) {
+            checkTextFields();
+        }
 
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
     };
 
-    void checkTextFields(){
+    void checkTextFields() {
         resetErrors();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -161,21 +180,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String mail = mEmailView.getText().toString();
         String pw = mPasswordView.getText().toString();
 
-        Log.v("mailLength",""+mail.length());
+        Log.v("mailLength", "" + mail.length());
 
-        if(mail.length() == 0){
+        if (mail.length() == 0) {
             mEmailView.setError("Bitte eine E-Mailadresse eingeben");
         }
 
-        if(isEmailValid(mail) && isPasswordValid(pw)){
+        if (isEmailValid(mail) && isPasswordValid(pw)) {
             mEmailSignInButton.setEnabled(true);
-        }else{
+        } else {
             mEmailSignInButton.setEnabled(false);
         }
     }
 
-    // Todo bootstrap
-    void bootstrapTodoItems(){
+    // Todo delete bootstrap
+    void bootstrapTodoItems() {
         Todo.deleteAll(Todo.class);
 
         for (int i = 1; i <= 100; i++) {
@@ -184,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             long offset = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
             long end = Timestamp.valueOf("2016-10-30 00:00:00").getTime();
             long diff = end - offset + 1;
-            tmp.dueDate = new Date(offset + (long)(Math.random() * diff));
+            tmp.dueDate = new Date(offset + (long) (Math.random() * diff));
             tmp.isFavourite = Math.random() < 0.3;
             tmp.isDone = Math.random() < 0.5;
             tmp.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ";
@@ -235,10 +254,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private void resetErrors(){
+    private void resetErrors() {
         mEmailView.setError(null);
         mPasswordView.setError(null);
     }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -284,11 +304,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+
+            if (isOnline()) {
+                // ToDo Nach Betätigung des Login Buttons sollen die eingegebenen Werte an einen Server übermittelt und dort überprüft werden.
+                // toDo Die Überprüfung soll asynchron erfolgen.
+
+                // Hinweis, das Login nicht möglich ist
+                Toast.makeText(getApplicationContext(), "Login nicht möglich :(", Toast.LENGTH_LONG).show();
+            } else {
+                // ToDo Besteht beim Start der Android-Anwendung keine Verbindung zur Webanwendung, wird sofort die Todoliste angezeigt.
+                // Eine lokale Anmeldung ist nicht erforderlich.
+                // (Anm.: die Vergabe von Punkten für diese Anforderung erfolgt nur, wenn die Anmeldung unter Verwendung der Webanwendung grundsätzlich umgesetzt ist.)
+                loginSuccess();
+            }
+
+
             //mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
 
-            this.startActivity(new Intent(this,TodoListActivity.class));
+
         }
+    }
+
+    private void loginSuccess() {
+        this.startActivity(new Intent(this, TodoListActivity.class));
     }
 
     private boolean isEmailValid(String email) {
