@@ -27,8 +27,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.activeandroid.query.Select;
-
 import de.hering.tdoo.adapters.TodoAdapter;
 import de.hering.tdoo.model.Todo;
 

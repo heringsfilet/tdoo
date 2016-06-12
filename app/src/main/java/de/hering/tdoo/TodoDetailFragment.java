@@ -178,7 +178,7 @@ public class TodoDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setOnFocusChangeListener(onDateFocusChangeListener);
             ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnFocusChangeListener(onTimeFocusChangeListener);
 
-            // prevent app crashing when clicking on the text field // ToDo: better use a label instead of TextField?!
+            // prevent app crashing when clicking on the text field
             ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnClickListener(onDateClickListener);
             ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnClickListener(onDateClickListener);
 
