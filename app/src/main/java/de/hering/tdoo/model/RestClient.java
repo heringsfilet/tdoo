@@ -1,6 +1,8 @@
 package de.hering.tdoo.model;
 
-import com.loopj.android.http.*;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 public class RestClient {
     // ToDo enter ip of computer for genymotion access to webapp
@@ -10,15 +12,13 @@ public class RestClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.addHeader("content-type", CONTENT_TYPE);
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-//        JSONObject jsonParams = new JSONObject();
-//        jsonParams.put("notes", "Test api support");
-//        StringEntity entity = new StringEntity(jsonParams.toString());
-//        client.post(context, restApiUrl, entity, "application/json",
-//                responseHandler);
+        client.addHeader("Accept", "text/json");
+        client.addHeader("content-type", CONTENT_TYPE);
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
@@ -27,6 +27,8 @@ public class RestClient {
     }
 
     public static void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+
+        client.addHeader("content-type", CONTENT_TYPE);
         client.put(getAbsoluteUrl(url), params, responseHandler);
     }
 
