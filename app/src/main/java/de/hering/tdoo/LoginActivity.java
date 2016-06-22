@@ -111,8 +111,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 getAllItemsFromWeb();
             }
         } else {
-            // ToDo make it visible forever!
-            Snackbar.make(findViewById(R.id.loginLayout), "Webanwendung nicht erreichbar, Speicherung nur lokal möglich!", Snackbar.LENGTH_INDEFINITE).show();
             loginSuccess();
         }
 

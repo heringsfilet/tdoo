@@ -32,6 +32,15 @@ public class TodoAdapter extends
 
     public TodoAdapter(List<Todo> items) {
         mValues = items;
+
+        // update view when data changes
+        registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                notifyDataSetChanged();
+                super.onChanged();
+            }
+        });
     }
 
     @Override

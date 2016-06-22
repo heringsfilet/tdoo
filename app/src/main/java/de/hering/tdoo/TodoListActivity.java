@@ -1,6 +1,8 @@
 package de.hering.tdoo;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -78,6 +80,14 @@ public class TodoListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.todo_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+        // ToDo listen on change and update recycler
+
+        // show error message if no connection available
+        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+        if (!globalVariable.getIsOnline()) {
+            Snackbar.make(findViewById(R.id.listActivityView), "Webanwendung nicht erreichbar, Speicherung nur lokal möglich!", Snackbar.LENGTH_INDEFINITE).show();
+        }
     }
 
     @Override
