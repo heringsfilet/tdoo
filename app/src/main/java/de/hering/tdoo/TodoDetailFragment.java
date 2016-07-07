@@ -8,15 +8,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,9 +37,6 @@ public class TodoDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private Todo mItem;
-
-    private TimePickerFragment timePicker;
-    private DatePickerFragment datePicker;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -75,11 +69,11 @@ public class TodoDetailFragment extends Fragment {
             mItem.isFavourite = !mItem.isFavourite;
             View rootView = (View) v.getParent().getParent().getParent();
             if(mItem.isFavourite){
-                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
-                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
+                rootView.findViewById(R.id.starViewOn).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.starViewOff).setVisibility(View.GONE);
             }else{
-                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.VISIBLE);
-                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.GONE);
+                rootView.findViewById(R.id.starViewOff).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.starViewOn).setVisibility(View.GONE);
             }
         }
     };
@@ -130,7 +124,7 @@ public class TodoDetailFragment extends Fragment {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if(hasFocus){
-                timePicker = new TimePickerFragment();
+                TimePickerFragment timePicker = new TimePickerFragment();
                 timePicker.mItem = mItem;
                 View parentView  = (View) v.getParent().getParent();
                 timePicker.timeText = ((TextView) parentView.findViewById(R.id.todo_detail_duetime));
@@ -147,7 +141,7 @@ public class TodoDetailFragment extends Fragment {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if(hasFocus){
-                datePicker = new DatePickerFragment();
+                DatePickerFragment datePicker = new DatePickerFragment();
                 datePicker.mItem = mItem;
                 View parentView  = (View) v.getParent().getParent();
                 datePicker.dateText = ((TextView) parentView.findViewById(R.id.todo_detail_duedate));
@@ -162,9 +156,7 @@ public class TodoDetailFragment extends Fragment {
 
     private View.OnClickListener onDateClickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-            return;
-        }
+        public void onClick(View v) {}
     };
 
     @Override
@@ -176,29 +168,29 @@ public class TodoDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setText(mItem.getDueDateDateString());
             ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setText(mItem.getDueTimeString());
 
-            ((TextView) rootView.findViewById(R.id.todo_detail_duedate)).setOnFocusChangeListener(onDateFocusChangeListener);
-            ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnFocusChangeListener(onTimeFocusChangeListener);
+            rootView.findViewById(R.id.todo_detail_duedate).setOnFocusChangeListener(onDateFocusChangeListener);
+            rootView.findViewById(R.id.todo_detail_duetime).setOnFocusChangeListener(onTimeFocusChangeListener);
 
             // prevent app crashing when clicking on the text field
-            ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnClickListener(onDateClickListener);
-            ((TextView) rootView.findViewById(R.id.todo_detail_duetime)).setOnClickListener(onDateClickListener);
+            rootView.findViewById(R.id.todo_detail_duetime).setOnClickListener(onDateClickListener);
+            rootView.findViewById(R.id.todo_detail_duetime).setOnClickListener(onDateClickListener);
 
 
             if(mItem.dueDate.before(new Date())){
-                ((LinearLayout) rootView.findViewById(R.id.todo_detail_duedatecontainer)).setBackgroundColor(Color.parseColor("#FFCDD2"));
+                rootView.findViewById(R.id.todo_detail_duedatecontainer).setBackgroundColor(Color.parseColor("#FFCDD2"));
             }
 
             ((EditText) rootView.findViewById(R.id.editName)).setText(mItem.name);
             ((TextView) rootView.findViewById(R.id.todo_detail_description)).setText(mItem.description);
-            ((ImageView) rootView.findViewById(R.id.starViewOn)).setOnClickListener(onFavouriteClickListener);
-            ((ImageView) rootView.findViewById(R.id.starViewOff)).setOnClickListener(onFavouriteClickListener);
+            rootView.findViewById(R.id.starViewOn).setOnClickListener(onFavouriteClickListener);
+            rootView.findViewById(R.id.starViewOff).setOnClickListener(onFavouriteClickListener);
 
             if(mItem.isFavourite){
-                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.VISIBLE);
-                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.GONE);
+                rootView.findViewById(R.id.starViewOn).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.starViewOff).setVisibility(View.GONE);
             }else{
-                ((ImageView) rootView.findViewById(R.id.starViewOff)).setVisibility(View.VISIBLE);
-                ((ImageView) rootView.findViewById(R.id.starViewOn)).setVisibility(View.GONE);
+                rootView.findViewById(R.id.starViewOff).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.starViewOn).setVisibility(View.GONE);
             }
 
             ((CheckBox) rootView.findViewById(R.id.checkBox)).setChecked(mItem.isDone);
@@ -210,9 +202,9 @@ public class TodoDetailFragment extends Fragment {
                 }
             };
 
-            ((CheckBox) rootView.findViewById(R.id.checkBox)).setOnClickListener(onCheckboxClickListener);
-            ((Button) rootView.findViewById(R.id.deleteButton)).setOnClickListener(onDeleteClickListener);
-            ((Button) rootView.findViewById(R.id.saveButton)).setOnClickListener(onSaveClickListener);
+            rootView.findViewById(R.id.checkBox).setOnClickListener(onCheckboxClickListener);
+            rootView.findViewById(R.id.deleteButton).setOnClickListener(onDeleteClickListener);
+            rootView.findViewById(R.id.saveButton).setOnClickListener(onSaveClickListener);
         }
 
         return rootView;

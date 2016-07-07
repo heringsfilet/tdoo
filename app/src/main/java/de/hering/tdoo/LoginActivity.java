@@ -3,13 +3,9 @@ package de.hering.tdoo;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -51,9 +47,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -69,18 +63,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -90,9 +72,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Todo remove bootstrapping after development
-        //bootstrapTodoItems();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -100,7 +79,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-        // ToDo wait until go to list - small delay in loading items (maybe watcher in tdoolist elements?)
         if (globalVariable.getIsOnline()) {
             List<Todo> tdoolist = Todo.findWithQuery(Todo.class, "SELECT * from Todo ORDER BY is_done ASC");
             if (tdoolist.size() > 0) {
@@ -164,7 +142,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Pull out the first event on the public timeline
                     for (int i = 0; i < items.length(); i++) {
                         try {
-                            Number id = items.getJSONObject(i).getLong("id");
                             final Integer counter = i;
                             final Integer counterLength = items.length();
                             RestClient.delete("/todos/" + items.getJSONObject(i).getLong("id"), null, new JsonHttpResponseHandler() {
@@ -229,7 +206,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void goToList() {
-        // wait a time
         this.startActivity(new Intent(this, TodoListActivity.class));
     }
 
@@ -331,10 +307,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
         resetErrors();
 
         // Store values at the time of the login attempt.
@@ -373,8 +345,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
             if (globalVariable.getIsOnline()) {
-                // ToDo Nach Betätigung des Login Buttons sollen die eingegebenen Werte an einen Server übermittelt und dort überprüft werden.
-                // toDo Die Überprüfung soll asynchron erfolgen.
                 RequestParams parameters = new RequestParams();
                 showProgress(true);
                 // Email: s@bht.de
@@ -393,6 +363,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         showProgress(false);
+                        // merkwürdigerweise gelangen wir immer hier rein :)
                         if (responseString.equals("true")) {
                             loginSuccess();
                         } else {
@@ -401,15 +372,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         super.onFailure(statusCode, headers, responseString, throwable);
                     }
                 });
-
             } else {
+                // wenn offline direkt weiterleiten
                 loginSuccess();
             }
         }
     }
 
     private void loginSuccess() {
-        this.startActivity(new Intent(this, TodoListActivity.class));
+        goToList();
     }
 
     private boolean isEmailValid(String email) {
@@ -538,75 +509,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 globalVariable.setIsOnline(false);
             }
             return null;
-        }
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            try {
-                RequestParams parameters = new RequestParams();
-                parameters.put("pwd", "");
-                parameters.put("email", "");
-                RestClient.put("/users/auth/", parameters, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONArray items) {
-                        // ToDo go to List
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        // ToDo show error
-                        super.onFailure(statusCode, headers, responseString, throwable);
-                    }
-                });
-
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
     }
 }

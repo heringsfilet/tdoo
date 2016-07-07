@@ -1,8 +1,5 @@
 package de.hering.tdoo.model;
 
-import android.app.Application;
-import android.util.Log;
-
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.orm.SugarRecord;
@@ -11,15 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.entity.StringEntity;
 import de.hering.tdoo.GlobalClass;
-import de.hering.tdoo.utils.DateParsingUtility;
 
 
 public class Todo extends SugarRecord implements Serializable {
@@ -84,7 +78,7 @@ public class Todo extends SugarRecord implements Serializable {
     @Override
     public long save() {
         Long id = super.save();
-        Boolean isOnline = (Boolean) GlobalClass.getIsOn();
+        Boolean isOnline = GlobalClass.getIsOn();
         if(isOnline){
             RequestParams params = fillRequestParams();
             params.setUseJsonStreamer(true);
@@ -96,7 +90,7 @@ public class Todo extends SugarRecord implements Serializable {
 
     @Override
     public boolean delete() {
-        Boolean isOnline = (Boolean) GlobalClass.getIsOn();
+        Boolean isOnline = GlobalClass.getIsOn();
         if(isOnline){
             RestClient.delete("/todos/" + this.getId(), null, new JsonHttpResponseHandler() {
                 @Override
